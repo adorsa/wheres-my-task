@@ -1,27 +1,42 @@
-# WheresMyTask
+# Where's my task
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.6.
+Where's my task is a web app that manages the user's tasks. The core logic is centered around the task's **time** and **geographical location**. These information allow to provide a focused view of the tasks that are **currently relevant** based on the time and user's current distance from the task.
 
-## Development server
+This project is intentionally designed as a **proof of concept**. The scope is deliberately limited in order to focus on the core logic, state management and overall structure rather than on feature completeness.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Ideas for further improvements that were left out for these reasons can be found [here](#future-roadmap).
 
-## Code scaffolding
+## Core concepts
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Task relevance
 
-## Build
+In this application, a task is considered relevant when, based on its time and location constraints relative to the current time and location of the user, it is reasonable for the user to act on it in the immediate future.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Time-based relevance
 
-## Running unit tests
+For a time-based task, relevance is determined by how close the current time is to the task's defined time frame. Tasks already within the time frame are considered of top relevance.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Tasks whose time frame is outside a predefined relevance window are not considered relevant.
 
-## Running end-to-end tests
+### Location-based relevance
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+For a location-based task, relevance is determined by the geographical proximity of the user to the task's location. Tasks closer to the user are of higher relevance.
 
-## Further help
+Tasks outside a predefined radius are not considered relevant.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Combined relevance
+
+For a task based on both time and location, relevance is determined by translating geographical distance into an equivalent time interval.
+
+In this proof-of-concept version, this translation is performed using a predefined heuristic, allowing combined relevance tasks to be evaluated consistently with time-based tasks.
+
+## Design decisions
+
+In order to keep the project easy to evaluate, the scope was intentionally kept limited to a few core features. The focus is on providing an interesting experience for the user while keeping the code simple and clear enough for an easy evaluation.
+
+## Future roadmap
+
+While the focus of this project is to showcase a proof of concept, I have a direction in mind for this app in the future. Here is what I plan to implement:
+
+* Integration with Maps APIs for a more accurate estimate of the time distance from each task's location
+* Background updates and push notifications
