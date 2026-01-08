@@ -4,7 +4,7 @@ Where's my task is a web app that manages the user's tasks. The core logic is ce
 
 This project is intentionally designed as a **proof of concept**. The scope is deliberately limited in order to focus on the core logic, state management and overall structure rather than on feature completeness.
 
-Ideas for further improvements that were left out for these reasons can be found in the [Future roadmap](#future-roadmap) section.
+Ideas for further improvements that were left out for these reasons can be found [here](#future-roadmap).
 
 ## Core concepts
 
