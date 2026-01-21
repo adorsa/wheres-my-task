@@ -18,6 +18,8 @@ For a time-based task, relevance is determined by how close the current time is 
 
 Tasks whose time frame is outside a predefined relevance window are not considered relevant.
 
+Tasks remain however relevant after the end of their time frame and are marked as overdue.
+
 ### Location-based relevance
 
 For a location-based task, relevance is determined by the geographical proximity of the user to the task's location. Tasks closer to the user are of higher relevance.
