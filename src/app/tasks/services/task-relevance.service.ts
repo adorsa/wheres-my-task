@@ -45,7 +45,7 @@ export class TaskRelevanceService {
         if(userLocation) {
           let distance = Geodesic.WGS84.Inverse(userLocation.latitude, userLocation.longitude, task.locationConstraint.latitude, task.locationConstraint.longitude);
           //todo manage distance calculation fail
-          if(distance.s12 && distance.s12 <= this.TASK_RELEVANCE_RANGE_KM) {
+          if(distance.s12 && distance.s12 <= this.TASK_RELEVANCE_RANGE_KM * 1000) {
             //todo add relevance calculation relative to distance from target location
             relTasks.push({task: task, relevanceScore: 1, isOverdue: false});
           }

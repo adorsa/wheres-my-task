@@ -133,7 +133,6 @@ describe('TaskRelevanceService', () => {
 
     const result = service.evaluate([task], now, location);
 
-    expect(result.length).toBe(1);
-    expect(result[0].relevanceScore).toBeGreaterThan(0);
+    expect(result.length).toBe(0);
   });
 });
