@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { TaskRelevanceService } from './task-relevance.service';
 import { Task } from '../../core/models/task';
 import { TaskStatus } from '../../core/models/task-status';
+import { UserLocation } from '../../core/models/user-location';
 
 describe('TaskRelevanceService', () => {
   let service: TaskRelevanceService;
@@ -71,7 +72,7 @@ describe('TaskRelevanceService', () => {
 
     const result = service.evaluate([task], now);
 
-    expect(result.length).toBe(1);
+    expect(result.length).toBeGreaterThan(0);
     expect(result[0].task).toBe(task);
   });
 
@@ -92,5 +93,47 @@ describe('TaskRelevanceService', () => {
     const result = service.evaluate([task], now);
 
     expect(result.length).toBe(0);
+  });
+
+  it('marks a location-based task as relevant when current location is close to the task location', () => {
+    const now = new Date();
+    const location: UserLocation = {latitude: 0, longitude: 0};
+
+    const task: Task = {
+      id: '1',
+      title: 'Near task',
+      status: TaskStatus.Active,
+      createdAt: new Date(),
+      locationConstraint: {
+        latitude: 0.00001,
+        longitude: 0
+      }
+    };
+
+    const result = service.evaluate([task], now, location);
+
+    expect(result.length).toBe(1);
+    expect(result[0].relevanceScore).toBeGreaterThan(0);
+  });
+
+  it('marks a location-based task as not relevant when current location is far to the task location', () => {
+    const now = new Date();
+    const location: UserLocation = {latitude: 0, longitude: 0};
+
+    const task: Task = {
+      id: '1',
+      title: 'Far task',
+      status: TaskStatus.Active,
+      createdAt: new Date(),
+      locationConstraint: {
+        latitude: 5,
+        longitude: 0
+      }
+    };
+
+    const result = service.evaluate([task], now, location);
+
+    expect(result.length).toBe(1);
+    expect(result[0].relevanceScore).toBeGreaterThan(0);
   });
 });

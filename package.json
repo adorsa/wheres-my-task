@@ -20,6 +20,8 @@
     "@angular/router": "^18.2.0",
     "@supabase/supabase-js": "^2.90.0",
     "date-fns": "^4.1.0",
+    "geographiclib-dms": "^2.2.0",
+    "geographiclib-geodesic": "^2.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
